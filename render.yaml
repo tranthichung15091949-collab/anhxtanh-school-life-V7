@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: anhxtanh-school-life
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
