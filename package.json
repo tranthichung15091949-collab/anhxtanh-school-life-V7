@@ -1,1 +1,11 @@
-{"name": "anhxtanh-school-life-v9","version": "9.0.0","private":true,"scripts":{"start":"node server.js"},"dependencies":{"ws":"^8.18.0"}}
+{
+  "name": "anhxtanh-school-life-v10",
+  "version": "10.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
