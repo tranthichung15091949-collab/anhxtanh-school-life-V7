@@ -34,7 +34,7 @@ server.on('upgrade',(req,socket,head)=>{
 function validPosition(m){return Number.isFinite(m.x)&&Number.isFinite(m.z)&&Math.abs(m.x)<=75&&m.z>=-75&&m.z<=80}
 wss.on('connection',ws=>{
  const id=String(nextId++),joinedAt=Date.now();let joined=false,lastMove=Date.now(),lastX=0,lastZ=14;
- let windowStart=Date.now(),count=0,lastChat=0;
+ let windowStart=Date.now(),count=0,lastChat=0,lastEmote=0;
  ws.isAlive=true;ws.on('pong',()=>ws.isAlive=true);
  send(ws,{type:'hello',id,players:[...players.values()]});
  ws.on('message',raw=>{
@@ -58,6 +58,11 @@ wss.on('connection',ws=>{
    lastMove=now;lastX=m.x;lastZ=m.z;player.x=m.x;player.z=m.z;
    player.rotation=Number.isFinite(m.rotation)?Math.max(-100,Math.min(100,m.rotation)):0;
    broadcast({type:'moved',id,x:player.x,z:player.z,rotation:player.rotation})
+  }
+  if(m.type==='emote'){
+   const allowed=['wave','laugh','block','dance','highfive'];
+   if(typeof m.emote!=='string'||!allowed.includes(m.emote)||now-lastEmote<900)return;
+   lastEmote=now;broadcast({type:'emote',id,emote:m.emote});return;
   }
   if(m.type==='chat'){
    if(now-lastChat<800)return;lastChat=now;
