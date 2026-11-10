@@ -2,7 +2,7 @@
 const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto');
 const {WebSocketServer,WebSocket}=require('ws');
 const root=path.join(__dirname,'public');
-const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.mp3':'audio/mpeg'};
 const server=http.createServer((req,res)=>{
  if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405).end();return}
  let pathname;try{pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname)}catch{res.writeHead(400).end();return}
@@ -78,4 +78,4 @@ wss.on('connection',ws=>{
 const heartbeat=setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();continue}ws.isAlive=false;ws.ping()}},30000);
 server.on('close',()=>clearInterval(heartbeat));
 const port=Number(process.env.PORT)||3000;
-server.listen(port,()=>console.log('AnhXtanh V10 server listening on '+port));
+server.listen(port,()=>console.log('AnhXtanh V13 server listening on '+port));
