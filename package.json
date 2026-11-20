@@ -1,6 +1,6 @@
 {
   "name": "anhxtanh-school-life-v16",
-  "version": "16.0.0",
+  "version": "17.0.0",
   "private": true,
   "scripts": {
     "start": "node server.js"
