@@ -78,4 +78,4 @@ wss.on('connection',ws=>{
 const heartbeat=setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();continue}ws.isAlive=false;ws.ping()}},30000);
 server.on('close',()=>clearInterval(heartbeat));
 const port=Number(process.env.PORT)||3000;
-server.listen(port,()=>console.log('AnhXtanh V13 server listening on '+port));
+server.listen(port,()=>console.log('AnhXtanh V17 server listening on '+port));
